@@ -7,30 +7,48 @@ module CfnDsl
       {
         'AWS::Serverless::Function' => {
           'Properties' => {
-            'Handler'     => { 'PrimitiveType' => 'String' },
-            'Runtime'     => { 'PrimitiveType' => 'String' },
-            'CodeUri'     => { 'PrimitiveType' => 'String' },
-            'Description' => { 'PrimitiveType' => 'String' },
-            'MemorySize'  => { 'PrimitiveType' => 'Integer' },
-            'Timeout'     => { 'PrimitiveType' => 'Integer' },
-            'Environment' => { 'PrimitiveType' => 'Json' },
-            'Events'      => { 'PrimitiveType' => 'Json' },
-            'Policies'    => { 'Type' => 'List', 'ItemType' => 'Policy' }
+            'Handler'                      => { 'PrimitiveType' => 'String' },
+            'Runtime'                      => { 'PrimitiveType' => 'String' },
+            'CodeUri'                      => { 'PrimitiveType' => 'String' },
+            'FunctionName'                 => { 'PrimitiveType' => 'String' },
+            'Description'                  => { 'PrimitiveType' => 'String' },
+            'MemorySize'                   => { 'PrimitiveType' => 'Integer' },
+            'Timeout'                      => { 'PrimitiveType' => 'Integer' },
+            'Role'                         => { 'PrimitiveType' => 'String' },
+            'Policies'                     => { 'Type' => 'List', 'ItemType' => 'Policy' },
+            'Environment'                  => { 'PrimitiveType' => 'Json' },
+            'VpcConfig'                    => { 'Type' => 'VpcConfig' },
+            'Events'                       => { 'PrimitiveType' => 'Json' },
+            'Tags'                         => { 'PrimitiveType' => 'Json' },
+            'Tracing'                      => { 'PrimitiveType' => 'String' },
+            'KmsKeyArn'                    => { 'PrimitiveType' => 'String' },
+            'DeadLetterQueue'              => { 'PrimitiveType' => 'Json' },
+            'DeploymentPreference'         => { 'Type' => 'DeploymentPreference' },
+            'AutoPublishAlias'             => { 'PrimitiveType' => 'String' },
+            'ReservedConcurrentExecutions' => { 'PrimitiveType' => 'Integer' }
           }
         },
         'AWS::Serverless::Api' => {
           'Properties' => {
-            'StageName'           => { 'PrimitiveType' => 'String' },
-            'DefinitionUri'       => { 'PrimitiveType' => 'String' },
-            'CacheClusterEnabled' => { 'PrimitiveType' => 'Boolean' },
-            'CacheClusterSize'    => { 'PrimitiveType' => 'String' },
-            'Variables'           => { 'PrimitiveType' => 'Json' }
+            'Name'                  => { 'PrimitiveType' => 'String' },
+            'StageName'             => { 'PrimitiveType' => 'String' },
+            'DefinitionUri'         => { 'PrimitiveType' => 'String' },
+            'DefinitionBody'        => { 'PrimitiveType' => 'Json' },
+            'CacheClusterEnabled'   => { 'PrimitiveType' => 'Boolean' },
+            'CacheClusterSize'      => { 'PrimitiveType' => 'String' },
+            'Variables'             => { 'PrimitiveType' => 'Json' },
+            'MethodSettings'        => { 'PrimitiveType' => 'Json' },
+            'EndpointConfiguration' => { 'PrimitiveType' => 'String' },
+            'BinaryMediaTypes'      => { 'Type' => 'List', 'PrimitiveType' => 'String' },
+            'Cors'                  => { 'PrimitiveType' => 'String' }
           }
         },
         'AWS::Serverless::SimpleTable' => {
           'Properties' => {
             'PrimaryKey' => { 'Type' => 'PrimaryKey' },
-            'ProvisionedThroughput' => { 'Type' => 'ProvisionedThroughput' }
+            'ProvisionedThroughput' => { 'Type' => 'ProvisionedThroughput' },
+            'Tags'                  => { 'PrimitiveType' => 'Json' },
+            'TableName'             => { 'PrimitiveType' => 'String' }
           }
         },
         'AWS::SSM::Parameter' => {
@@ -71,6 +89,20 @@ module CfnDsl
           'Properties' => {
             'PolicyDocument' => { 'PrimitiveType' => 'Json' },
             'PolicyName'     => { 'PrimitiveType' => 'String' }
+          }
+        },
+        'AWS::Serverless::Function.VpcConfig' => {
+          'Properties' => {
+            'SecurityGroupIds' => { 'Type' => 'List', 'PrimitiveType' => 'String' },
+            'SubnetIds' => { 'Type' => 'List', 'PrimitiveType' => 'String' }
+          }
+        },
+        'AWS::Serverless::Function.DeploymentPreference' => {
+          'Properties' => {
+            'Enabled' => { 'PrimitiveType' => 'Boolean' },
+            'Type'    => { 'PrimitiveType' => 'String' },
+            'Alarms'  => { 'Type' => 'List', 'PrimitiveType' => 'String' },
+            'Hooks'   => { 'Type' => 'List', 'PrimitiveType' => 'String' }
           }
         }
       }
